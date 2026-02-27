@@ -1,28 +1,29 @@
-part of 'chat_bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../domain/entities/chat_message_entity.dart';
 
 class ChatState extends Equatable {
   final List<ChatMessageEntity> messages;
   final bool isTyping;
-  final String? errorMessage;
+  final String? error;
 
   const ChatState({
     this.messages = const [],
     this.isTyping = false,
-    this.errorMessage,
+    this.error,
   });
 
   ChatState copyWith({
     List<ChatMessageEntity>? messages,
     bool? isTyping,
-    String? errorMessage,
+    String? error,
   }) {
     return ChatState(
       messages: messages ?? this.messages,
       isTyping: isTyping ?? this.isTyping,
-      errorMessage: errorMessage ?? this.errorMessage,
+      error: error,
     );
   }
 
   @override
-  List<Object?> get props => [messages, isTyping, errorMessage];
+  List<Object?> get props => [messages, isTyping, error];
 }

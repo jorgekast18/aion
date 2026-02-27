@@ -55,3 +55,6 @@ lib/firebase_options.dart
 
 # Firebase Distribution Key
 firebase-auth-key.json
+
+# Google service
+google-services.json

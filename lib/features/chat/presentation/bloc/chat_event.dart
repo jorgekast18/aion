@@ -1,4 +1,4 @@
-part of 'chat_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class ChatEvent extends Equatable {
   const ChatEvent();
@@ -7,6 +7,7 @@ abstract class ChatEvent extends Equatable {
 }
 
 class ChatHistoryLoaded extends ChatEvent {}
+
 class ChatMessageSent extends ChatEvent {
   final String text;
   const ChatMessageSent(this.text);

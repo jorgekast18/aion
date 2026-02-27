@@ -38,3 +38,9 @@ AION utiliza una base de datos de Firestore con el ID `aion`. Asegúrate de tene
 
 ## 4. Flujo de Datos
 `UI -> BLoC -> Use Case -> Repository (Interface) -> Repository (Impl) -> DataSource -> Firebase`
+
+### Solución a Errores de Login (reCAPTCHA/Network)
+Si recibes un error de `RecaptchaCallWrapper`, asegúrate de:
+1. Tener registradas las huellas SHA-1 y SHA-256 de tu máquina local en la consola de Firebase.
+2. Tener habilitada la **Play Integrity API** en Google Cloud Console.
+3. Reemplazar el `google-services.json` si se añadieron nuevas huellas.

@@ -11,20 +11,21 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Stream<String> getChatResponseStream(List<ChatMessageEntity> history) async* {
-    // Convertimos nuestro historial al formato que entiende Gemini
+    // Mapeamos nuestro historial al formato de Content de Google AI
     final contentHistory = history.map((m) {
       return m.role == MessageRole.user
           ? Content.text(m.text)
           : Content.model([TextPart(m.text)]);
     }).toList();
 
-    // El último mensaje es el que dispara la respuesta
-    final prompt = contentHistory.removeLast().parts.first as TextPart;
+    // El último mensaje es el que queremos enviar, el resto es contexto
+    final lastMessage = contentHistory.removeLast();
 
+    // Iniciamos la sesión de chat con el historial previo
     final chat = _model.startChat(history: contentHistory);
-    final responseStream = chat.sendMessageStream(Content.text(prompt.text));
+    final response = chat.sendMessageStream(lastMessage);
 
-    await for (final chunk in responseStream) {
+    await for (final chunk in response) {
       if (chunk.text != null) {
         yield chunk.text!;
       }

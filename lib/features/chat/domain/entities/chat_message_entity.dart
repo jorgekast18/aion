@@ -15,7 +15,6 @@ class ChatMessageEntity extends Equatable {
     required this.timestamp,
   });
 
-  // Method for update text
   ChatMessageEntity copyWith({String? text}) {
     return ChatMessageEntity(
       id: id,
