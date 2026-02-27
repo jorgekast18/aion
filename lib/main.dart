@@ -1,6 +1,8 @@
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -33,6 +35,22 @@ void main() async {
       androidProvider: AndroidProvider.playIntegrity,
     );
   }
+
+  // 2.1 Setup crashlytics
+  // 2.1.1. Capturar todos los errores que lanza el framework de Flutter
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+
+  // 2.1.2 Capturar errores asíncronos que no son atrapados por Flutter
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
+  // 2.1.3 Activar/Desactivar colección según el modo (opcional)
+  // En desarrollo podrías quererlo apagado, pero para debuggear tus cierres actuales:
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   // 3. CRÍTICO: Inicializar el Storage ANTES que la inyección de dependencias
   // Si di.init() o cualquier llamada posterior intenta instanciar un Bloc,

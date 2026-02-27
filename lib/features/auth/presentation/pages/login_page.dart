@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/auth_text_field.dart';
-
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 

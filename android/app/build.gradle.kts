@@ -8,6 +8,8 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
     // App Distribution
     id("com.google.firebase.appdistribution")
+    // Crashlytics
+    id("com.google.firebase.crashlytics")
 }
 
 android {
