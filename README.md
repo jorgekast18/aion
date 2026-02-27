@@ -20,6 +20,12 @@ El proyecto se divide en módulos (`features`). Cada módulo contiene:
 ## 3. Requisitos para Desarrolladores (Setup)
 Para que este proyecto compile, debes configurar manualmente los siguientes archivos que están ignorados por seguridad:
 
+### Variables de Entorno
+Este proyecto utiliza `flutter_dotenv` para manejar datos sensibles. Debes crear un archivo `.env` en la raíz del proyecto con el siguiente formato:
+
+```text
+GEMINI_API_KEY=AIzaSy... (Obtenla en Google AI Studio)
+```
 ### Firebase
 1. Instalar Firebase CLI y FlutterFire CLI.
 2. Ejecutar `flutterfire configure` para generar:
