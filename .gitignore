@@ -52,3 +52,6 @@ lib/firebase_options.dart
 
 # Environment secrets
 .env
+
+# Firebase Distribution Key
+firebase-auth-key.json

@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // En Kotlin DSL las funciones requieren paréntesis ()
+        classpath("com.google.firebase:firebase-appdistribution-gradle:5.1.1")
+    }
+}
+
 allprojects {
     repositories {
         google()

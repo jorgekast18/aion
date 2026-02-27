@@ -6,6 +6,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // App Distribution
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -34,10 +36,17 @@ android {
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+        getByName("release") {
+            // Se mantiene tu configuración de firmado actual
             signingConfig = signingConfigs.getByName("debug")
+
+            // CONFIGURACIÓN SENIOR PARA KOTLIN DSL
+            configure<com.google.firebase.appdistribution.gradle.AppDistributionExtension> {
+                // Usamos la referencia al rootProject para que no haya duda de la ruta
+                serviceCredentialsFile = rootProject.file("../firebase-auth-key.json").absolutePath
+                releaseNotes = "AION v1.0.0 - Módulo de Autenticación Completo"
+                groups = "beta-testers"
+            }
         }
     }
 }
